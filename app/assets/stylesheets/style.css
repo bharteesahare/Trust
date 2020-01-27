@@ -1,0 +1,18 @@
+.sign_up_lnk{
+    background-color:#fff !important;
+    border-radius:28px;
+    text-decoration:none;
+    color:#3596d4 !important;
+}
+.sign_in_lnk{
+    padding:5px 18px 5px 18px !important;
+}
+.sign_out_lnk{
+    padding:6px 12px 6px 12px !important;
+};
+.sign_in_lnk{
+    color:#fff !important;
+    background-color:#3596d4;
+    border-radius:28px;
+    float:right;
+}

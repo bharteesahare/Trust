@@ -1,0 +1,15 @@
+<div class="container-fluid" style="margin: 30px !important;">
+
+<table style="border-collapse: collapse;width: 100%;border: 1px solid black; text-align: center;">
+	<tr style="border: 1px solid black;height: 50px;">
+		<th style="border: 1px solid black; width: 500px; text-align: center;">Name</th>
+		<th style="border: 1px solid black;text-align: center;">Project Name</th>
+	</tr>
+	<% @story_categories.each do |sc|%>
+	<tr>
+		<td style="border: 1px solid black;"><%= sc.name %></td>
+		<td style="border: 1px solid black;"><%= sc.project.name %></td>
+	</tr>
+	<% end %>
+</table>
+</div>

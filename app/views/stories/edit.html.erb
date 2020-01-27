@@ -1,0 +1,23 @@
+<h3>Add a Edit Story</h3>
+<%= form_for @story do |f| %>
+
+	<div class="form-group">
+    <%= f.label :project_id, "Select Project"%>
+   	<%= f.select(:project_id, Project.all.map{|r| [r.name, r.id]}, {}, { :class => 'form-control' }) %>          
+  </div>
+  <div class="form-group">
+    <%= f.label :story_category_id, "Select Project"%>
+    <%= f.select(:story_category_id, StoryCategory.all.map{|r| [r.name, r.id]}, {}, { :class => 'form-control' }) %>          
+  </div>
+
+  <div class="field">
+    <%= f.label :name%>
+    <%= f.text_field :name, required:true %>        
+  </div>
+  <div class="field">
+     <%= f.label :description%>
+    <%= f.text_field :description %>        
+  </div>
+  
+  <%= f.submit %>
+<% end %>

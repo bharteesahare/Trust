@@ -1,0 +1,125 @@
+<div class="container-fluid">
+<div class="row">
+	<div class="col-xs-12" style="margin-top: 27px;">
+		<div class="col-xs-3">
+			<div class="panel panel-default" style="padding-top: 14px;">
+				<div class="panel-title" style="font-weight: bold;margin: 10px;"> Charities (<%= @charities.count %>)
+					<%= link_to 'Add a Charity', new_charity_path, class: "btn btn-primary", style: "float:right;margin-top: -7px;color: white;"%>
+				</div>
+				<hr>
+			  <div class="panel-body" style="padding: 0px;">
+			  	<% @charities.each do |charity|%>
+				  	<ul style="list-style-type:none;margin-left: -17px;margin-right: 17px;">
+				  		<li><%= link_to charity.name, charity_path(charity) %>
+				  		<span>
+				  		<div class="dropdown" style="float:right;">
+					  		<a data-toggle="dropdown"><i class="fa fa-cog"></i>
+						    <span class="caret"></span></a>
+						    <ul class="dropdown-menu">
+						      <li><%= link_to 'Edit', edit_charity_path(charity) %></li>
+	            		<%#= link_to 'Show', edit_user_registration_path %>
+	            		<li><%= link_to 'Delete', charity_path(charity), method: :delete %></li>
+						    </ul>
+						   </div> 
+	            </span>
+	          </li>
+          	</ul>
+			  	<% end %>
+			  </div>
+			</div>	
+		</div>
+		<div class="col-xs-3">
+			<div class="panel panel-default" style="padding-top: 14px;">
+				<div class="panel-title" style="font-weight: bold;margin: 10px;"> Projects (<%= @projects.count %>)
+					<%= link_to 'Add a Project', new_project_path, class: "btn btn-primary", style: "float:right;margin-top: -7px;color: white;"%>
+				</div>
+				<hr>
+			  <div class="panel-body">
+			  	<div class="panel-body" style="padding: 0px;">
+			  	<% @projects.each do |project|%>
+				  	<ul style="list-style-type:none;margin-left: -17px;margin-right: 17px;">
+				  		<li><%= link_to project.name, project_path(project) %>(<%= project.charity.name%>)
+				  		<span>
+				  		<div class="dropdown" style="float:right;">
+					  		<a data-toggle="dropdown"><i class="fa fa-cog"></i>
+						    <span class="caret"></span></a>
+						    <ul class="dropdown-menu">
+						      <li><%= link_to 'Edit', edit_project_path(project) %></li>
+	            		<%#= link_to 'Show', edit_user_registration_path %>
+	            		<li><%= link_to 'Delete', project_path(project), method: :delete %></li>
+						    </ul>
+						   </div> 
+	            </span>
+	          </li>
+          	</ul>
+			  	<% end %>
+			  </div>
+			  </div>
+			</div>
+		</div>
+		<div class="col-xs-3">
+			<div class="panel panel-default" style="padding-top: 14px;">
+				<div class="panel-title" style="font-weight: bold;margin: 0px;"> StoryCategories (<%= @story_categories.count %>)
+					<%= link_to 'Add a StoryCategories', new_story_category_path, class: "btn btn-primary", style: "margin-top: -2px;font-size: 11px;color: white;"%>
+				</div>
+				<hr>
+			  <div class="panel-body">
+			  	<div class="panel-body" style="padding: 0px;">
+			  		<% @story_categories.each do |story_category|%>
+				  	<ul style="list-style-type:none;margin-left: -17px;margin-right: 17px;">
+				  		<li><%= link_to story_category.name, story_categories_path(story_category) %>(<%= story_category.project.name%>)
+				  		<span>
+				  		<div class="dropdown" style="float:right;">
+					  		<a data-toggle="dropdown"><i class="fa fa-cog"></i>
+						    <span class="caret"></span></a>
+						    <ul class="dropdown-menu">
+						      <li><%= link_to 'Edit', edit_story_category_path(story_category) %></li>
+	            		<%#= link_to 'Show', edit_user_registration_path %>
+	            		<li><%= link_to 'Delete', story_category_path(story_category), method: :delete %></li>
+						    </ul>
+						   </div> 
+	            </span>
+	          </li>
+          	</ul>
+			  	<% end %>
+			  </div>
+			  </div>
+			</div>
+		</div>
+		<div class="col-xs-3">
+			<div class="panel panel-default" style="padding-top: 14px;">
+				<div class="panel-title" style="font-weight: bold;margin: 10px;" > Story (<%= @stories.count %>)
+					<%= link_to 'Add a Story', new_story_path, class: "btn btn-primary", style: "float:right;margin-top: -7px;color: white;"%>
+				</div>
+				<hr>
+			  <div class="panel-body">
+			  	<div class="panel-body" style="padding: 0px;">
+			  	<% @stories.each do |story|%>
+				  	<ul style="list-style-type:none;margin-left: -17px;margin-right: 17px;">
+				  		<li><%= link_to story.name, stories_path(story) %>
+				  		<span>
+				  		<div class="dropdown" style="float:right;">
+					  		<a data-toggle="dropdown"><i class="fa fa-cog"></i>
+						    <span class="caret"></span></a>
+						    <ul class="dropdown-menu">
+						      <li><%= link_to 'Edit', edit_story_path(story) %></li>
+	            		<%#= link_to 'Show', edit_user_registration_path %>
+	            		<li><%= link_to 'Delete', story_path(story), method: :delete %></li>
+						    </ul>
+						   </div> 
+	            </span>
+	          </li>
+          	</ul>
+			  	<% end %>
+			  </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+<% if current_user.role == 'admin' %>
+	<%= link_to 'Add a Charity',home_user_permissions_path, class: "btn btn-primary" %>
+<% end %>
+
+
+</div>

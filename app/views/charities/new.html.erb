@@ -1,0 +1,14 @@
+<h3>Add a new Charity</h3>
+<%= form_for @charity do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="field">
+    <%= f.label :name%>
+    <%= f.text_field :name, required:true %>        
+  </div>
+  <div class="field">
+     <%= f.label :description%>
+    <%= f.text_field :description %>        
+  </div>
+  
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,99 @@
+<table style="border-collapse: collapse;width: 100%;border: 1px solid black; text-align: center;" id="mytable">
+  <tr style="border: 1px solid black;height: 50px;">
+    <th style="border: 1px solid black; width: 500px; text-align: center;">User</th>
+    <th style="border: 1px solid black;text-align: center;">Charity</th>
+    <th style="border: 1px solid black;text-align: center;">Project</th>
+    <th style="border: 1px solid black;text-align: center;">Story</th>
+    <th style="border: 1px solid black;text-align: center;">StoryCatgeory</th>
+    <th>Save</th>
+  </tr>
+  <% setting_list = ["viewable", "all"] %>
+  <% @users.each do |user| %>
+    <tr>  
+      <td style="border: 1px solid black;"><%= user.email %></td>
+      <td style="border: 1px solid black;">
+        <select id="charityOption">
+          <%= setting_list.each do |setting| %>
+            <% if setting == "all" %>
+              <% if user.settings(:charity_settings).all == true %>
+                <% charity_selected = true %>
+              <% else %>
+                <% charity_selected = false %>
+              <% end %>
+            <% elsif setting == "viewable" %>
+              <% if user.settings(:charity_settings).viewable == true %>
+                <% charity_selected = true %>
+              <% else %>
+                <% charity_selected = false %>
+              <% end %>
+            <% end %>
+            <option value="<%= setting %>" selected="<%= charity_selected %>"><%= setting %></option>
+          <% end %>
+        </select> 
+      </td>
+      <td style="border: 1px solid black;">
+        <select id="projectOption">
+          <%= setting_list.each do |setting| %>
+            <option value="<%= setting %>"><%= setting %></option>
+          <% end %>
+        </select> 
+      </td>
+      <td style="border: 1px solid black;">
+        <select id="storyOption">
+          <%= setting_list.each do |setting| %>
+            <option value="<%= setting %>"><%= setting %></option>
+          <% end %>
+        </select> 
+      </td>
+      <td style="border: 1px solid black;">
+        <select id="storyCategoryOption">
+          <%= setting_list.each do |setting| %>
+            <option value="<%= setting %>"><%= setting %></option>
+          <% end %>
+        </select> 
+      </td>
+      <td><button onclick="savePermissions();">Submit</button></td>
+
+    </tr>
+  <% end %>
+  <!-- <input type="button" id="insert-more" value="Add New Row" onclick="addRow()" /> -->
+</table>
+<button class="btn btn-primary" id="insert-more"> Add New Row </button>
+
+<script type="text/javascript">
+  $("#insert-more").click(function () {
+    $("#mytable").each(function () {
+       var tds = '<tr>';
+       jQuery.each($('tr:last td', this), function () {
+           tds += '<td>' + $(this).html() + '</td>';
+       });
+       tds += '</tr>';
+       if ($('tbody', this).length > 0) {
+           $('tbody', this).append(tds);
+       } else {
+           $(this).append(tds);
+           alert("test 2");
+       }
+    });
+  });
+
+  function savePermissions(){
+    user_id = $("#selectUser").find("option:selected").val();
+    charity_option = $("#charityOption").find("option:selected").val();
+    project_option = $("#projectOption").find("option:selected").val();
+    story_category_option = $("#storyCategoryOption").find("option:selected").val();
+    story_option = $("#storyOption").find("option:selected").val();
+
+    $.ajax({
+      method:'get',
+      url: '/home/set_permissions',
+      data: {charity_option: charity_option, user_id: user_id, project_option: project_option,story_category_option: story_category_option,story_option: story_option },
+      success: function(data) {
+        $(".container-fluid").find(".alert-success").text("Successfully allocated permissions for selected users");
+      },
+      error: function(data) {
+
+      },
+    });
+  }
+</script>
